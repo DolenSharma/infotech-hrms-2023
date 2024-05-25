@@ -135,7 +135,7 @@ class Trend
     public function mapValuesToDates(Collection $values): Collection
     {
         $values = $values->map(fn ($value) => new TrendValue(
-            date: $value->date,
+            date: $value->{$this->dateAlias},
             aggregate: $value->aggregate,
         ));
 
@@ -166,7 +166,7 @@ class Trend
     protected function getSqlDate(): string
     {
         $adapter = match ($this->builder->getConnection()->getDriverName()) {
-            'mysql' => new MySqlAdapter(),
+            'mysql', 'mariadb' => new MySqlAdapter(),
             'sqlite' => new SqliteAdapter(),
             'pgsql' => new PgsqlAdapter(),
             default => throw new Error('Unsupported database driver.'),

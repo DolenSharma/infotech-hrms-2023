@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('referrals', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->foreignId('user_id')->serialize()->searchable();
+            $table->foreignId('user_id')->serialize()->searchable()->nullable();
             $table->text('referral_id')->serialize()->searchable();
             $table->string('post_id')->nullable();
             $table->string('email_id')->unique();

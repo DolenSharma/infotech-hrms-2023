@@ -20,7 +20,7 @@ final class IconsManifest
 
     private ?array $manifest = null;
 
-    public function __construct(Filesystem $filesystem, string $manifestPath, FilesystemFactory $disks = null)
+    public function __construct(Filesystem $filesystem, string $manifestPath, ?FilesystemFactory $disks = null)
     {
         $this->filesystem = $filesystem;
         $this->manifestPath = $manifestPath;
@@ -78,8 +78,8 @@ final class IconsManifest
     private function format(string $pathname, string $path): string
     {
         return (string) Str::of($pathname)
-            ->after($path.'/')
-            ->replace('/', '.')
+            ->after($path.DIRECTORY_SEPARATOR)
+            ->replace(DIRECTORY_SEPARATOR, '.')
             ->basename('.svg');
     }
 

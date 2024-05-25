@@ -3,3 +3,30 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* public/css/theme.css */
+:root {
+    --background-color: #ffffff;
+    --text-color: #000000;
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+body.dark {
+    --background-color: #000000;
+    --text-color: #ffffff;
+}
+
+/* Additional styles */
+.toggle-theme {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    padding: 10px 20px;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    border: none;
+    cursor: pointer;
+}

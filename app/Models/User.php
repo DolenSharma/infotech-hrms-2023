@@ -48,7 +48,7 @@ class User extends Authenticatable //implements FilamentUser
 
     public function candidate()
     {
-        return $this->hasMany(Candidate::class);
+        return $this->hasMany(Consultant::class);
     }
     public function post()
     {

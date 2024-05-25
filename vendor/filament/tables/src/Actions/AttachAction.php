@@ -67,7 +67,9 @@ class AttachAction extends Action
                 /** @var BelongsToMany $relationship */
                 $relationship = $this->getRelationship();
 
-                $record = $relationship->getRelated()->query()->where($relationship->getQualifiedRelatedKeyName(), $data['recordId'])->first();
+                $record = $relationship->getRelated()->query()
+                    ->{is_array($data['recordId']) ? 'whereIn' : 'where'}($relationship->getQualifiedRelatedKeyName(), $data['recordId'])
+                    ->get();
 
                 $relationship->attach(
                     $record,
@@ -212,7 +214,7 @@ class AttachAction extends Action
                     fn (Builder $query): Builder => $query->whereDoesntHave(
                         $this->getInverseRelationshipName(),
                         function (Builder $query): Builder {
-                            return $query->where($this->getRelationship()->getParent()->getQualifiedKeyName(), $this->getRelationship()->getParent()->getKey());
+                            return $query->where($query->qualifyColumn($this->getRelationship()->getParent()->getKeyName()), $this->getRelationship()->getParent()->getKey());
                         },
                     ),
                 )

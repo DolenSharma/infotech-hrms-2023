@@ -6,11 +6,11 @@
     "license": "MIT",
     "require": {
         "php": "^8.1.0",
-        "filament/filament": "^2.0",
+        "filament/filament": "*",
         "filament/forms": "^2.0",
         "filament/spatie-laravel-media-library-plugin": "^2.0",
         "filament/tables": "^2.0",
-        "flowframe/laravel-trend": "^0.1.1",
+        "flowframe/laravel-trend": "*",
         "guzzlehttp/guzzle": "^7.2",
         "haruncpi/laravel-id-generator": "^1.1",
         "inertiajs/inertia-laravel": "^0.6.8",
@@ -26,7 +26,6 @@
     "require-dev": {
         "doctrine/dbal": "^3.6",
         "fakerphp/faker": "^1.9.1",
-        "laravel/breeze": "*",
         "laravel/pint": "^1.0",
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.4",

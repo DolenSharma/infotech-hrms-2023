@@ -177,10 +177,14 @@ class ConsultantResource extends Resource
             ->imagePreviewHeight('250')
             ->imageCropAspectRatio('16:9')
             ->imageResizeTargetWidth('1920')
-            ->imageResizeTargetHeight('1080'),
+            ->imageResizeTargetHeight('1080')
+            ->directory('users-avatar')
+            ->image(),
           FileUpload::make('con_cv')->label('Consultant CV')->placeholder('--Upload CV--')->nullable()
           ->required()
-          ->enableDownload(),
+          ->enableDownload()
+          ->directory('attachments'),
+
           Select::make('profile_given_by')
                 ->label('Profile Given By')->required()
                 ->options(User::all()->pluck('name', 'name'))

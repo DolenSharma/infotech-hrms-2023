@@ -104,7 +104,7 @@ trait HasFilters
 
             $field->state(match (true) {
                 is_array($state) => [],
-                $state === true => false,
+                is_bool($state) => false,
                 default => null,
             });
         }
@@ -174,6 +174,11 @@ trait HasFilters
             ],
             default => 1,
         };
+    }
+
+    protected function getTableFiltersFormMaxHeight(): ?string
+    {
+        return null;
     }
 
     protected function getTableFiltersFormSchema(): array

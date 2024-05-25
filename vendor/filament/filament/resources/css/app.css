@@ -28,20 +28,17 @@
         @apply relative bg-no-repeat;
         background-image: radial-gradient(
             circle at top,
-            theme('colors.success.900'),
-            theme('colors.rose.400'),
-            theme('colors.pink.600'),
-            theme('colors.sky.400') 100%
+            theme('colors.primary.100'),
+            theme('colors.white') 50%
         );
     }
 
     .dark .filament-login-page {
         background-image: radial-gradient(
             circle at top,
-            theme('colors.black'),
-            theme('colors.yellow.600'),
-            theme('colors.gray.600'),
-            theme('colors.green.900') 100%
+            theme('colors.primary.800'),
+            theme('colors.gray.800'),
+            theme('colors.gray.900') 100%
         );
     }
 
@@ -53,7 +50,7 @@
     }
 
     .filament-sidebar-header::before {
-        @apply pointer-events-none absolute inset-x-0 mx-auto h-px w-full bg-gradient-to-r from-gray-200 via-primary-400 to-gray-200 dark:from-gray-200 dark:via-primary-400 dark:to-gray-200;
+        @apply pointer-events-none absolute inset-x-0 mx-auto h-px w-full bg-gradient-to-r from-gray-200 via-primary-400 to-gray-200 dark:from-gray-700 dark:via-primary-400 dark:to-gray-700;
         content: '';
         z-index: 1;
         bottom: -1px;

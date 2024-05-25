@@ -6,6 +6,7 @@ use Closure;
 use function Filament\Forms\array_move_after;
 use function Filament\Forms\array_move_before;
 use Filament\Forms\Contracts\HasForms;
+use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -420,14 +421,16 @@ class Repeater extends Field implements Contracts\CanConcealComponents
             ->toArray();
     }
 
-    public function getLabel(): string
+    public function getLabel(): string | Htmlable | null
     {
         if ($this->label === null && $this->hasRelationship()) {
-            return (string) Str::of($this->getRelationshipName())
+            $label = (string) Str::of($this->getRelationshipName())
                 ->before('.')
                 ->kebab()
                 ->replace(['-', '_'], ' ')
                 ->ucfirst();
+
+            return ($this->shouldTranslateLabel) ? __($label) : $label;
         }
 
         return parent::getLabel();
@@ -461,6 +464,13 @@ class Repeater extends Field implements Contracts\CanConcealComponents
         $relationship = $this->getRelationship();
         $relationshipQuery = $relationship->getQuery();
 
+        if ($relationship instanceof BelongsToMany) {
+            $relationshipQuery->select([
+                $relationship->getTable() . '.*',
+                $relationshipQuery->getModel()->getTable() . '.*',
+            ]);
+        }
+
         if ($this->modifyRelationshipQueryUsing) {
             $relationshipQuery = $this->evaluate($this->modifyRelationshipQueryUsing, [
                 'query' => $relationshipQuery,
@@ -478,7 +488,7 @@ class Repeater extends Field implements Contracts\CanConcealComponents
         );
     }
 
-    public function getItemLabel(string $uuid): ?string
+    public function getItemLabel(string $uuid): string | Htmlable | null
     {
         return $this->evaluate($this->itemLabel, [
             'state' => $this->getChildComponentContainer($uuid)->getRawState(),

@@ -30,7 +30,7 @@ final class Factory
     public function __construct(
         Filesystem $filesystem,
         IconsManifest $manifest,
-        FilesystemFactory $disks = null,
+        ?FilesystemFactory $disks = null,
         array $config = []
     ) {
         $this->filesystem = $filesystem;

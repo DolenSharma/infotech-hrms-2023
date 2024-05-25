@@ -22,3 +22,4 @@
         @livewire('notifications')
     </body>
 </html>
+

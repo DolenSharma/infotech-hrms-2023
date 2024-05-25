@@ -104,9 +104,9 @@ class UserPolicy
     public function before(User $user)
 {
     // Check if the user has the role "Band - 0" or "Band - I"
-    if ($user->hasRole(['Band - 0', 'Band - I'])) {
+    if ($user->hasRole(['band - 0', 'band - I'])) {
         // Check if the current time is within office hours (Monday to Friday)
-        $now = now('NPT');
+        $now = now('CST');
         $dayOfWeek = $now->dayOfWeek;
         $office_hours_start = '08:00:00';
         $office_hours_end = '17:00:00';
