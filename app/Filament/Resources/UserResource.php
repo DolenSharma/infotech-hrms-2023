@@ -54,19 +54,23 @@ class UserResource extends Resource
                         ->multiple()
                        ->relationship('roles', 'name')->preload(),
                     Forms\Components\FileUpload::make('avatar')
+                        ->avatar()
                         ->label('Avatar')
                         ->autofocus()
-                        ->required()
                         ->image()
-                        ->enableDownload()
-                        ->imagePreviewHeight('250')
-                        ->enableOpen()
-                        ->minSize(4)
-                        ->maxSize(1024)
+                        // ->enableDownload()
+                        ->imagePreviewHeight('150')
+                        // ->enableOpen()
+                        ->minSize(100)
+                        ->maxSize(102400)
+                        ->disk('public')
                         ->image()
                         ->directory('users-avatar')
-                        ->preserveFilenames(),
-
+                        ->preserveFilenames()
+                        ->uploadButtonPosition('right') // Set the position of the upload button.
+                        ->imageCropAspectRatio('1:1')
+                        ->imageResizeTargetHeight(150) // Resize images to this height (in pixels) when they are uploaded.
+                        ->imageResizeTargetWidth(150), // Resize images to this width (in pixels) when they are uploaded.
                 ])->columns(4)
                     ]);
     }

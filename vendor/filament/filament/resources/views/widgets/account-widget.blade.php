@@ -5,6 +5,7 @@
         @endphp
 
         <div class="flex h-12 items-center space-x-4 rtl:space-x-reverse">
+            
             <x-filament::user-avatar :user="$user" />
 
             <div>
