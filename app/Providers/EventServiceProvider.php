@@ -2,12 +2,14 @@
 
 namespace App\Providers;
 
+use App\Models\User;
 use App\Models\Bdmpost;
 use App\Models\Consultant;
 use App\Models\Interview;
 use App\Models\Referral;
 use App\Models\Post;
 use App\Models\Submission;
+use App\Observers\UserObserver;
 use App\Models\Uploadownprofile;
 use App\Observers\SubmissionObserver;
 use App\Observers\InterviewObserver;
@@ -43,6 +45,7 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        User::observe(UserObserver::class);
         Submission::observe(SubmissionObserver::class);
         Consultant::observe(ConsultantObserver::class);
         Interview::observe(InterviewObserver::class);

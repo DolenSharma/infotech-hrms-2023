@@ -26,8 +26,8 @@ return new class extends Migration
             $table->string('city')->searchable();
             $table->string('visa_status')->searchable();
             $table->text('photo');
-            $table->text('driving_license');
-            $table->text('uploaded_cv');
+            $table->text('driving_license')->nullable();
+            $table->text('uploaded_cv')->nullable();
         });
 
         Schema::table('uploadownprofiles', function($table) {

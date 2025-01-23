@@ -4,6 +4,7 @@ namespace App\Observers;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Uploadownprofile;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 class UploadownprofileObserver
 {
 
@@ -59,7 +60,15 @@ class UploadownprofileObserver
      */
     public function deleted(Uploadownprofile $Uploadownprofile)
     {
-        //
+        if (! is_null($Uploadownprofile->driving_license)) {
+            Storage::disk('public')->delete($Uploadownprofile->driving_license);
+        }
+        if (! is_null($Uploadownprofile->uploaded_cv)) {
+            Storage::disk('public')->delete($Uploadownprofile->uploaded_cv);
+        }
+        if (! is_null($Uploadownprofile->photo)) {
+            Storage::disk('public')->delete($Uploadownprofile->photo);
+        }
     }
 
     /**
@@ -83,4 +92,17 @@ class UploadownprofileObserver
     {
         //
     }
+    public function saved(Uploadownprofile $uploadownprofile): void
+    {
+        if ($uploadownprofile->isDirty('driving_license')) {
+            Storage::disk('public')->delete($uploadownprofile->getOriginal('driving_license'));
+        }
+        if ($uploadownprofile->isDirty('uploaded_cv')) {
+            Storage::disk('public')->delete($uploadownprofile->getOriginal('uploaded_cv'));
+        }
+        if ($uploadownprofile->isDirty('photo')) {
+            Storage::disk('public')->delete($uploadownprofile->getOriginal('photo'));
+        }
+    }
+ 
 }

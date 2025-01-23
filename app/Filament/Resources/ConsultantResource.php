@@ -173,17 +173,19 @@ class ConsultantResource extends Resource
                 ]),
 
             FileUpload::make('image')
-            ->required()
             ->imagePreviewHeight('250')
-            ->imageCropAspectRatio('16:9')
-            ->imageResizeTargetWidth('1920')
-            ->imageResizeTargetHeight('1080')
-            ->directory('users-avatar')
+            ->imageCropAspectRatio('1:1')
+            ->imageResizeTargetWidth('150')
+            ->imageResizeTargetHeight('150')
+            ->directory('consultant-photos')
             ->image(),
           FileUpload::make('con_cv')->label('Consultant CV')->placeholder('--Upload CV--')->nullable()
-          ->required()
           ->enableDownload()
-          ->directory('attachments'),
+          ->directory('consultant-attachments')
+          ->acceptedFileTypes(['application/pdf'])
+          ->loadingIndicatorPosition('right')
+          ->uploadButtonPosition('right') // Set the position of the upload button.
+          ->uploadProgressIndicatorPosition('right'), // Set the position of the upload progress indicator.
 
           Select::make('profile_given_by')
                 ->label('Profile Given By')->required()

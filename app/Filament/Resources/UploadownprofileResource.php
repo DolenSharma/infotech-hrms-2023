@@ -131,18 +131,21 @@ class UploadownprofileResource extends Resource
                     'Others'  =>'Others',
                     ]),
                 Forms\Components\FileUpload::make('photo')
+                    ->directory('ownprofile-photos')
                     ->autofocus()
                     ->required()
                     ->image()
                     ->enableDownload()
                     ->imagePreviewHeight('250'),
                 Forms\Components\FileUpload::make('driving_license')
+                    ->directory('ownprofile-drivinglicense')
                     ->autofocus()
                     ->required()
                     ->label('Driving License')
                     ->enableDownload(),
                     
                 Forms\Components\FileUpload::make('uploaded_cv')
+                   ->directory('ownprofile-attachments')
                    ->enableDownload()
                    ->label('Your CV')
                    ->autofocus()

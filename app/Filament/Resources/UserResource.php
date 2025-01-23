@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\UserResource\Pages;
 use App\Filament\Resources\UserResource\Pages\CreateUser;
+use Livewire\TemporaryUploadedFile;
 
 class UserResource extends Resource
 {
@@ -58,15 +59,22 @@ class UserResource extends Resource
                         ->label('Avatar')
                         ->autofocus()
                         ->image()
+                        ->storeFileNamesIn('users-avatar-original')
                         // ->enableDownload()
                         ->imagePreviewHeight('150')
                         // ->enableOpen()
                         ->minSize(100)
                         ->maxSize(102400)
                         ->disk('public')
-                        ->image()
                         ->directory('users-avatar')
                         ->preserveFilenames()
+                        ->getUploadedFileNameForStorageUsing(
+                            function (TemporaryUploadedFile $file): string {
+                                $name = auth()->user()->name ?? 'default-username'; // Replace 'default-username' if needed
+                                return (string) str($file->getClientOriginalName())
+                                    ->prepend("avatar-uploaded-by-{$name}-");
+                            }
+                        )
                         ->uploadButtonPosition('right') // Set the position of the upload button.
                         ->imageCropAspectRatio('1:1')
                         ->imageResizeTargetHeight(150) // Resize images to this height (in pixels) when they are uploaded.
