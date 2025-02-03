@@ -1,11 +1,7 @@
 <?php
 
-use App\Http\Controllers\CountSubmissionController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\SubmissionChartController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProfileController;
-use App\Models\Role;
 
 Route::middleware(['auth'])->group(function(){
     // Route::get('/sample-chart', [SubmissionChartController::class, 'index']);
@@ -13,8 +9,5 @@ Route::middleware(['auth'])->group(function(){
     // // Route::get('/profile',[ProfileController::class,'index'])->name('profile');
 
 });
-
-
-
-
-
+// Home Page Route (define this FIRST to prioritize it)
+Route::get('/', [HomeController::class, 'index'])->name('home');

@@ -104,12 +104,12 @@ class UserPolicy
     public function before(User $user)
 {
     // Check if the user has the role "Band - 0" or "Band - I"
-    if ($user->hasRole(['band - 0', 'band - I'])) {
+    if ($user->hasRole(['band - 0', 'band - I', 'band - II'])) {
         // Check if the current time is within office hours (Monday to Friday)
-        $now = now('CST');
+        $now = now('Asia/Kathmandu');
         $dayOfWeek = $now->dayOfWeek;
-        $office_hours_start = '08:00:00';
-        $office_hours_end = '17:00:00';
+        $office_hours_start = '10:30:00';
+        $office_hours_end = '5:45:00';
         if ($dayOfWeek >= 1 && $dayOfWeek <= 5 && !$now->between($now->copy()->setTimeFromTimeString($office_hours_start), $now->copy()->setTimeFromTimeString($office_hours_end))) {
             auth()->logout();
             return "Login in office hours";

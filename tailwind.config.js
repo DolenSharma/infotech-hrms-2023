@@ -1,16 +1,17 @@
 const colors = require('tailwindcss/colors')
 
 module.exports = {
-    content: ['./resources/**/*.blade.php', './vendor/filament/**/*.blade.php'],
+    content: [
+      "./resources/**/*.blade.php",
+      "./resources/**/*.js",
+    ],
     theme: {
-        extend: {
-            colors: {
-                danger: colors.rose,
-                primary: colors.blue,
-                success: colors.green,
-                warning: colors.yellow,
-            },
+      extend: {
+        colors: {
+          'avocado-primary': '#2d5a27', // Deep green
+          'avocado-secondary': '#88b04b', // Light green
         },
+      },
     },
     
     plugins: [
